@@ -1,51 +1,84 @@
+require_relative '../Tickets/tickets'
+
+# Manage the operations of the application
+# Handles the Console I/O, and interacts with the Tickets class to display tickets
 class Application
+  attr_accessor :quit_application
 
-	attr_accessor :quit_application
-
-  def initialize(api_token)
+  def initialize(url, username, api_token)
     @token = api_token
-		@quit_application = false
+    @quit_application = false
+
+    @tickets = Tickets.new(url, username, api_token)
   end
 
-  def welcomeUser
-
-    puts "____________________________________"
-		puts 
-		puts "Welcome to the Zendesk Ticket Viewer."
-		puts "Built with <3 by Harrison Broadbent."
-		puts 
+  def welcome_user
+    puts '____________________________________'
+    puts
+    puts 'Welcome to the Zendesk Ticket Viewer.'
+    puts 'Built with <3 by Harrison Broadbent.'
+    puts
     puts "____________________________________\n"
-
   end
 
-  def displayPrompt
-
-		puts "Please select from the following options -"
-		puts
-		puts "\t1 : View all tickets (paginated to 25)"
-		puts "\t2 : View a specific ticket"
-		puts "\t3 : Exit the application"
-		puts
-		print "> "
-
+  def display_prompt
+    puts 'Please select from the following options -'
+    puts
+    puts "\t1 : View all tickets (paginated to 25)"
+    puts "\t2 : View a specific ticket"
+    puts "\t3 : Exit the application"
+    puts
+    print '> '
   end
 
-  def handleInput(input)
+  def check_api_available()
+    puts ""
+  
+    begin
+      test_ticket = @tickets.get_single(1)
+    rescue ZendeskAPI::Error::NetworkError
+      puts "\t *** Warning ***"
+      puts "We are having trouble connecting to Zendesk."
+      puts "We recommend you try again later."
+    rescue
+      puts "\t *** Warning ***"
+      puts "We are experiencing some unknown issues"
+      puts "We recommend you trying again later."
+    else
+      puts "We have checked the API and it seems to be ready to go."
+    end
+    
+    puts
+  end
 
-		input = input.to_i
+  def handle_input(input)
+    input = input.to_i
 
-		case input
-		when 1
-			puts input
-		when 2
-			puts input
-		when 3 then @quit_application = true; puts "Goodbye, have a nice day"
-		else
-			puts "Please enter a valid option"
-		end
+    case input
+    when 1
+      # page to 25 per page max here
+      ticketCollection = @tickets.get_all
+      ticketCollection.each() do |ticket, index|
+        # display a page header if we are on a new page
+        if (index == 0 || index % 25 == 0)
+          puts "____________ Page #{index} ____________"
+        end 
 
+        # regardless, display the ticket
+        ticket.display
+      end
 
-	end
+    when 2
+      puts 'Enter a ticket ID : '
+      print '> '
+      @tickets.get_single(gets.chomp.to_i).display
 
+    when 3
+      @quit_application = true
+      puts 'Goodbye, have a nice day'
+
+    else
+      puts 'Please enter a valid option'
+    end
+  end
 end
-

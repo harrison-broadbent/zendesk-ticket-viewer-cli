@@ -7,6 +7,16 @@ class Ticket
     @tags = tags
   end
 
+  def initializeFromData(data)
+  
+    @requester_id = data.requester_id
+    @assignee_id = data.assignee_id
+    @subject = data.subject
+    @description = data.description
+    @tags = data.tags
+  
+  end
+
   def display
     puts "Requester ID \t: " + @requester_id
     puts "Assignee ID  \t: " + @assignee_id
