@@ -3,9 +3,7 @@ require_relative "./ticket.rb"
 
 class Tickets
 
-  def initialize(url, username, api_token)
-    @api_token = api_token
-    
+  def initialize(url, username, api_token)    
     @client = ZendeskAPI::Client.new do |config| 
     
       config.url = url
@@ -17,9 +15,8 @@ class Tickets
 
   def get_all()
     tickets = []
-
     @client.tickets.all! do |ticket| 
-      tickets += Ticket.new().initializeFromData(ticket)
+      tickets.append(Ticket.new(ticket))
     end
 
     tickets
@@ -27,7 +24,7 @@ class Tickets
 
   def get_single(ticket_id)
     ticketData = @client.tickets.find!(:id => ticket_id)
-    return Ticket.new().initializeFromData(ticketData)
+    return Ticket.new(ticketData)
   end
 
 end

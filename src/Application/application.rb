@@ -35,7 +35,7 @@ class Application
     puts ""
   
     begin
-      test_ticket = @tickets.get_single(1)
+      test_ticket = @tickets.get_single(2)
     rescue ZendeskAPI::Error::NetworkError
       puts "\t *** Warning ***"
       puts "We are having trouble connecting to Zendesk."
@@ -58,14 +58,24 @@ class Application
     when 1
       # page to 25 per page max here
       ticketCollection = @tickets.get_all
-      ticketCollection.each() do |ticket, index|
+      ticketCollection.each_with_index do |ticket, index|
         # display a page header if we are on a new page
-        if (index == 0 || index % 25 == 0)
-          puts "____________ Page #{index} ____________"
+        # and display a footer and wait for the user to proceed if we have just finished a page
+        if (index % 25 == 0)
+          if (index != 0)
+            pagenum = index / 25;
+            puts "________ End of Page #{pagenum} _________"
+            puts "[ENTER] for the next page: "
+            puts
+            gets
+            puts "____________ Page #{pagenum} ____________"
+          end
         end 
 
         # regardless, display the ticket
+        puts "******"
         ticket.display
+        puts "******"
       end
 
     when 2

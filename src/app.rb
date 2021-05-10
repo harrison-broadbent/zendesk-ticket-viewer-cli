@@ -2,9 +2,9 @@ require_relative "./Application/application.rb"
 
 # Hardcode the API token for simplicity
 # Store in an evironmental variable if security is a concern
-API_URL = "https://zendesk-internship-challenge.zendesk.com/api/v2"
-API_USERNAME = "harrisonbroadbent@gmail.com"
-API_TOKEN = 'yfqST59724N6IMnG0z4yxcupZR6tmc1ySJwGsAaB'
+API_URL = "https://harrison-development.zendesk.com/api/v2"
+API_USERNAME = "development.harrison@gmail.com"
+API_TOKEN = 'lqJauN9eTuebk2abaR0Im6SjzZ2xDNDbGxELl4ru'
 
 # Create an instance of the application, 
 # Begin the main application loop
