@@ -39,4 +39,3 @@ class Ticket
 
   end
 end
-
