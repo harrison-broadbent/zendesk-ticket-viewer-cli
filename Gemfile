@@ -7,3 +7,4 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem "zendesk_api"
 gem "terminal-table", "~> 3.0"
 gem "minitest"
+gem "rake"
