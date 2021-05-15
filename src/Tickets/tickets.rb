@@ -23,8 +23,18 @@ class Tickets
   end
 
   def get_single(ticket_id)
-    ticketData = @client.tickets.find!(:id => ticket_id)
-    return Ticket.new(ticketData)
+
+    begin
+      ticketData = @client.tickets.find!(:id => ticket_id)
+      return Ticket.new(ticketData)
+    rescue ZendeskAPI::Error::RecordNotFound
+      puts
+      puts "An error has occured." 
+      puts "Could not find a ticket with that ID."
+      puts "Please try again with a valid ID."
+      puts "You may want to try viewing all tickets to see their associated IDs. "
+      puts
+    end
   end
 
 end
