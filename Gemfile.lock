@@ -13,7 +13,9 @@ GEM
     hashie (4.1.0)
     inflection (1.0.0)
     mini_mime (1.1.0)
+    minitest (5.14.4)
     multipart-post (2.1.1)
+    rake (13.0.3)
     ruby2_keywords (0.0.4)
     terminal-table (3.0.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -29,6 +31,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  minitest
+  rake
   terminal-table (~> 3.0)
   zendesk_api
 

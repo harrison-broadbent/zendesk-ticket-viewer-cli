@@ -24,13 +24,15 @@ class Ticket
       ["Ticket ID", @id.to_s],
       ["Requester ID", @requester_id.to_s],
       ["Assignee ID", @assignee_id.to_s],
-      ["Tags", @tags.to_s], 
+      ["Tags", @tags.to_s],
       ["Subject", @subject.to_s],
-      ["Description", @description.to_s.scan(/.{1,66} /).join("\n")]
+      ["Description", @description.to_s.scan(/.{1,66}[ \W\d]/).join("\n")]
     ]
 
-    # Explanation of @description.to_s.scan(/.{1,66} /).join("\n") - 
-    # Adds a newline every 66 characters + a space
+    # Explanation of @description.to_s.scan(/.{1,66} /).join("\n") -
+    # Adds a newline every 66 characters .{1,66}
+    # + a space [ ]
+    # + possibly a group of digits / punctuation [\W\d]
     # Done so that long ticket descriptions print nicely in the terminal
 
     puts

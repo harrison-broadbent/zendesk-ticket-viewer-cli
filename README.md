@@ -23,3 +23,24 @@ curl https://zendesk-internship-challenge.zendesk.com/api/v2/imports/tickets/cre
 ```
 
 Inserting your own credentials where necessary, and ensuring that API access is enabled in your Zendesk setup.
+
+## Testing
+
+Testing is done using the Minitest gem.
+
+Tests are located in the /tests directory.
+
+Tests can be run individually by running -
+
+```sh
+ruby tests/..._test.rb
+```
+
+However, a rakefile has been setup to run all the tests automatically. They can be run by executing -
+
+```sh
+rake
+```
+
+from the root directory of the project.
+Any additional tests added to the tests/ directory will also be run.
