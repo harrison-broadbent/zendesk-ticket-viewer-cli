@@ -10,16 +10,18 @@ class Ticket
   # end
 
   def initialize(data)
+    @id           = data.id
     @requester_id = data.requester_id
-    @assignee_id = data.assignee_id
-    @subject = data.subject
-    @description = data.description
-    @tags = data.tags.map(&:id)
+    @assignee_id  = data.assignee_id
+    @subject      = data.subject
+    @description  = data.description
+    @tags         = data.tags.map(&:id)
   end
 
   def display
 
     table = Terminal::Table.new :rows => [
+      ["Ticket ID", @id.to_s],
       ["Requester ID", @requester_id.to_s],
       ["Assignee ID", @assignee_id.to_s],
       ["Tags", @tags.to_s], 
@@ -35,12 +37,5 @@ class Ticket
     puts table
     puts
 
-    # puts
-    # puts "Requester ID  \t: " + @requester_id.to_s
-    # puts "Assignee ID   \t: " + @assignee_id.to_s
-    # puts "Tags          \t: " + @tags.to_s
-    # puts "Subject       \t: " + @subject.to_s
-    # puts "Description   \t: " + @description.to_s
-    # puts
   end
 end

@@ -23,7 +23,12 @@ class Tickets
   end
 
   def get_page(page_number, per_page)
-    @client.tickets.page(page_number).per_page(per_page).fetch!
+    tickets = []
+    @client.tickets.page(page_number).per_page(per_page).fetch!.each do |ticket|
+      tickets.append(Ticket.new(ticket))
+    end
+
+    tickets
   end
 
   def get_single(ticket_id)
