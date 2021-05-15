@@ -22,6 +22,7 @@ class Application
   end
 
   def display_prompt
+    puts
     puts 'Please select from the following options -'
     puts
     puts "\t1 : View all tickets (paginated to 25)"
@@ -35,7 +36,7 @@ class Application
     puts ""
   
     begin
-      test_ticket = @tickets.get_single(2)
+      test_ticket = @tickets.get_test_ticket()
     rescue ZendeskAPI::Error::NetworkError
       puts "\t *** Warning ***"
       puts "We are having trouble connecting to Zendesk."
@@ -56,24 +57,25 @@ class Application
 
     case input
     when 1
-    
       page_number = 1
       per_page = 25
       tickets_paginated = @tickets.get_page(page_number, per_page)
-      
-      while !tickets_paginated.empty? do
-        puts "____________ Page #{page_number} ____________"
-
-        tickets_paginated.each(&:display)
-
-        puts "________ End of Page #{page_number} _________"
-        puts "[ENTER] for the next page: "
-        puts
-        gets
-
-        page_number = page_number + 1
-        tickets_paginated = @tickets.get_page(page_number, per_page)
-        puts tickets_paginated.length
+      if !tickets_paginated.nil?
+        while !tickets_paginated.empty? do
+          puts "____________ Page #{page_number} ____________"
+  
+          tickets_paginated.each(&:display)
+  
+          puts "________ End of Page #{page_number} _________"
+          puts "[ENTER] for the next page: "
+          puts
+          gets
+  
+          page_number = page_number + 1
+          tickets_paginated = @tickets.get_page(page_number, per_page)
+        end
+      else
+        puts "Not tickets to display"
       end
 
     when 2
