@@ -22,6 +22,10 @@ class Tickets
     tickets
   end
 
+  def get_page(page_number, per_page)
+    @client.tickets.page(page_number).per_page(per_page).fetch!
+  end
+
   def get_single(ticket_id)
     ticketData = @client.tickets.find!(:id => ticket_id)
     return Ticket.new(ticketData)
