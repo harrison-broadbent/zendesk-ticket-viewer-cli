@@ -45,7 +45,7 @@ class Application
       puts "We are experiencing some unknown issues"
       puts "We recommend you trying again later."
     else
-      puts "We have checked the API and it seems to be ready to go."
+      puts "We have checked the API and it seems ready for action."
     end
     
     puts
@@ -56,26 +56,24 @@ class Application
 
     case input
     when 1
-      # page to 25 per page max here
-      ticketCollection = @tickets.get_all
-      ticketCollection.each_with_index do |ticket, index|
-        # display a page header if we are on a new page
-        # and display a footer and wait for the user to proceed if we have just finished a page
-        if (index % 25 == 0)
-          if (index != 0)
-            pagenum = index / 25;
-            puts "________ End of Page #{pagenum} _________"
-            puts "[ENTER] for the next page: "
-            puts
-            gets
-            puts "____________ Page #{pagenum} ____________"
-          end
-        end 
+    
+      page_number = 1
+      per_page = 25
+      tickets_paginated = @tickets.get_page(page_number, per_page)
+      
+      while !tickets_paginated.empty? do
+        puts "____________ Page #{page_number} ____________"
 
-        # regardless, display the ticket
-        puts "******"
-        ticket.display
-        puts "******"
+        tickets_paginated.each(&:display)
+
+        puts "________ End of Page #{page_number} _________"
+        puts "[ENTER] for the next page: "
+        puts
+        gets
+
+        page_number = page_number + 1
+        tickets_paginated = @tickets.get_page(page_number, per_page)
+        puts tickets_paginated.length
       end
 
     when 2
@@ -90,5 +88,6 @@ class Application
     else
       puts 'Please enter a valid option'
     end
+
   end
 end
