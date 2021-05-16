@@ -2,6 +2,23 @@
 
 > Zendesk Ticket Viewer CLI application for the Zendesk coding interview challenge
 
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
+
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Setup](#setup)
+  - [Video](#video)
+  - [Application installation and setup](#application-installation-and-setup)
+- [Testing](#testing)
+- [Tech Stack](#tech-stack)
+- [Application Design Choices](#application-design-choices)
+  - [Classes](#classes)
+  - [Environment Variables](#environment-variables)
+  - [ZendeskAPI Gem](#zendeskapi-gem)
+  - [Minitest for testing](#minitest-for-testing)
+
 ## Requirements
 
 This application has been tested on, and requires, `ruby 3.0.0`.
@@ -73,7 +90,7 @@ The following gems are also used in this application -
 - [dotenv](https://github.com/bkeepers/dotenv) is used to load in environment variables from a `.env` file.
 - [rbenv](https://github.com/rbenv/rbenv) is not directly required but was used to manage Ruby environments.
 
-## Design
+## Application Design Choices
 
 ### Classes
 
