@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# use dotenv to manage application keys - url, username, token
+# Dotenv.require_keys will raise an error if the specified keys cannot be found
 require 'dotenv'
 Dotenv.load('.env')
+Dotenv.require_keys('API_URL', 'API_TOKEN', 'API_USERNAME')
 
 # Load in environment variables for the api
 # so that all the tests can access these values
