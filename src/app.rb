@@ -1,12 +1,15 @@
-require_relative "./Application/application.rb"
+require 'dotenv'
+require_relative './Application/application'
 
-# Hardcode the API token for simplicity
-# Store in an evironmental variable if security is a concern
-API_URL = "https://harrison-development.zendesk.com/api/v2"
-API_USERNAME = "development.harrison@gmail.com"
-API_TOKEN = 'lqJauN9eTuebk2abaR0Im6SjzZ2xDNDbGxELl4ru'
+Dotenv.load('../.env')
 
-# Create an instance of the application, 
+# Load in application secrets / details from .env file
+# These secrets should only be kept locally and not committed to source control
+API_URL = ENV['API_URL']
+API_TOKEN = ENV['API_TOKEN']
+API_USERNAME = ENV['API_USERNAME']
+
+# Create an instance of the application,
 # Begin the main application loop
 app = Application.new(API_URL, API_USERNAME, API_TOKEN)
 app.welcome_user()
@@ -14,9 +17,9 @@ app.welcome_user()
 # Check whether the Zendesk API is available
 app.check_api_available()
 
-# On each iteration - 
+# On each iteration -
 # 1: display the options to the user
-# 2: recieve user input
+# 2: receive user input
 # 3: execute based on user input
 while true
 

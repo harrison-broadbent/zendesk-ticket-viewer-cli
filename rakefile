@@ -1,4 +1,18 @@
-task :default => :test
+# frozen_string_literal: true
+
+require 'dotenv'
+Dotenv.load('.env')
+
+# Load in environment variables for the api
+# so that all the tests can access these values
+# without having to require them themselves
+API_URL = ENV['API_URL']
+API_TOKEN = ENV['API_TOKEN']
+API_USERNAME = ENV['API_USERNAME']
+
+# Rake task to run all tests in the tests/ folder automatically
+# To run tests call 'rake' from the root directory (same directory as this rakefile)
+task default: :test
 task :test do
-  Dir.glob('./tests/*_test.rb').each { |file| require file}
+  Dir.glob('./tests/*_test.rb').sort.each { |file| require file}
 end
