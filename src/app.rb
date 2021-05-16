@@ -1,7 +1,18 @@
 require 'dotenv'
 require_relative './Application/application'
 
-Dotenv.load('../.env')
+# check that environment variables have been properly loaded
+# warn the user if that is not the case
+begin
+  Dotenv.load('../.env')
+  Dotenv.require_keys('API_URL', 'API_TOKEN', 'API_USERNAME')
+rescue Dotenv::MissingKeys => e
+  puts
+  puts "\t *** Warning ***"
+  puts 'Key/s are missing from your .env file.'
+  puts e.to_s
+  puts
+end
 
 # Load in application secrets / details from .env file
 # These secrets should only be kept locally and not committed to source control
