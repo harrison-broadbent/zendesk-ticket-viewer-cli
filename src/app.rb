@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dotenv'
 require_relative './Application/application'
 
@@ -23,21 +25,21 @@ API_USERNAME = ENV['API_USERNAME']
 # Create an instance of the application,
 # Begin the main application loop
 app = Application.new(API_URL, API_USERNAME, API_TOKEN)
-app.welcome_user()
+app.welcome_user
 
 # Check whether the Zendesk API is available
-app.check_api_available()
+app.check_api_available
 
 # On each iteration -
 # 1: display the options to the user
 # 2: receive user input
 # 3: execute based on user input
-while true
+loop do
 
   app.display_prompt
   app.handle_input(gets.chomp)
 
-	# break out of the application if our user wishes to exit
-	app.quit_application ? break : next
+  # break out of the application if our user wishes to exit
+  app.quit_application ? break : next
 
 end

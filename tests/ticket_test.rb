@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'zendesk_api'
 require_relative '../src/Tickets/ticket'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require_relative '../src/Tickets/ticket'
 require_relative '../src/Tickets/tickets'

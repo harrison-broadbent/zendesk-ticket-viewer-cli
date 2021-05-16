@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'terminal-table'
 
 class Ticket
@@ -20,13 +21,13 @@ class Ticket
 
   def display
 
-    table = Terminal::Table.new :rows => [
-      ["Ticket ID", @id.to_s],
-      ["Requester ID", @requester_id.to_s],
-      ["Assignee ID", @assignee_id.to_s],
-      ["Tags", @tags.to_s],
-      ["Subject", @subject.to_s],
-      ["Description", @description.to_s.scan(/.{1,66}[ \W\d]/).join("\n")]
+    table = Terminal::Table.new rows: [
+      ['Ticket ID', @id.to_s],
+      ['Requester ID', @requester_id.to_s],
+      ['Assignee ID', @assignee_id.to_s],
+      ['Tags', @tags.to_s],
+      ['Subject', @subject.to_s],
+      ['Description', @description.to_s.scan(/.{1,66}[ \W\d]/).join("\n")]
     ]
 
     # Explanation of @description.to_s.scan(/.{1,66} /).join("\n") -
