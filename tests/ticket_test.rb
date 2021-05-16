@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'zendesk_api'
 require_relative '../src/Tickets/ticket'
 
-API_URL = 'https://harrison-development.zendesk.com/api/v2'
+# # API_URL, API_USERNAME, API_TOKEN loaded in via rakefile
 
 class TicketTest < MiniTest::Test
   def initialize(name)
