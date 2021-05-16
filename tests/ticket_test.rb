@@ -4,9 +4,19 @@ require 'minitest/autorun'
 require 'zendesk_api'
 require_relative '../src/Tickets/ticket'
 
-# # API_URL, API_USERNAME, API_TOKEN loaded in via rakefile
+# API_URL, API_USERNAME, API_TOKEN loaded in via rakefile.
 
+# Tests for the Ticket class.
+#
+# Tests:
+# - Ticket#initialize properly initializes and contains relevant info.
+# - Ticket#display displays as expected.
 class TicketTest < MiniTest::Test
+
+  # Initialize the test with some mock data..
+  #
+  # We only pass in the API_URL to the client config
+  # as we dont use it to make requests, just to create a sample ticket.
   def initialize(name)
     super
     @ticket_data = {
@@ -25,6 +35,8 @@ class TicketTest < MiniTest::Test
     @sample_ticket = ZendeskAPI::Ticket.new(@client, @ticket_data)
   end
 
+  # Test to ensure that a Ticket has the same data as a ZendeskAPI::Ticket
+  # when initialized from the same source.
   def test_ticket_initializes
     ticket = Ticket.new(@sample_ticket)
     ticket.instance_variables.sort.zip(@ticket_data.keys.sort).each do |instance_variable, key|
@@ -32,6 +44,8 @@ class TicketTest < MiniTest::Test
     end
   end
 
+  # Test that a ticket displays the way we expect it to.
+  # Added after I noticed that the ticket description was not displaying properly.
   def test_ticket_displays
     ticket = Ticket.new(@sample_ticket)
     assert_output(/

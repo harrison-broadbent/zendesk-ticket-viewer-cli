@@ -2,18 +2,25 @@
 
 require_relative '../Tickets/tickets'
 
-# Manage the operations of the application
-# Handles the Console I/O, and interacts with the Tickets class to display tickets
+# Manages most of the user-facing parts of the application.
+# Handles the Console I/O, and interacts with the Tickets class to display tickets.
 class Application
   attr_accessor :quit_application
 
+  # @quit_application is used to signal to app.rb that the user wants to quit.
+  # @tickets is an instance of the Tickets class initialized with appropriate credentials
+  #
+  # INPUT:
+  # url:        string
+  # username:   string
+  # api_token:  string
   def initialize(url, username, api_token)
-    @token = api_token
     @quit_application = false
-
     @tickets = Tickets.new(url, username, api_token)
   end
 
+  # Displays a welcome message in the console.
+  # Called once when the application begins.
   def welcome_user
     puts '____________________________________'
     puts
@@ -23,6 +30,8 @@ class Application
     puts "____________________________________\n"
   end
 
+  # Displays the possible actions to the user.
+  # Called on every iteration of the main application loop.
   def display_prompt
     puts
     puts 'Please select from the following options -'
@@ -34,6 +43,9 @@ class Application
     print '> '
   end
 
+  # Checks whether the Zendesk API is available by issuing a request to the API.
+  # Tickets normally handles errors itself, but the Tickets#get_test_ticket method
+  # deliberately avoids this so that any errors are surfaced.
   def check_api_available
     puts ''
 
@@ -54,14 +66,37 @@ class Application
     puts
   end
 
+  # Generic method for managing input from the user.
+  #
+  # INPUT:
+  # input: integer
   def handle_input(input)
-    input = input.to_i
 
+    # case input:
+    # when 1: display all tickets
+    # when 2: display a single ticket by id
+    # when 3: set @quit_application to true, indicating that the user wants to quit
     case input
     when 1
+      # Display all tickets.
+      # Uses the pagination implemented in Tickets#get_page
+      # to get a page of tickets at a time.
+      #
+      # As per the brief, each page is 25 tickets long,
+      # however that can be modified by changing the value of per_page.
       page_number = 1
       per_page = 25
       tickets_paginated = @tickets.get_page(page_number, per_page)
+
+      # if there are no tickets on page page_number,
+      # Tickets#get_page will return an empty array and tickets_paginated will be nil.
+      # Until this happens, we want to display pages of tickets.
+      #
+      # if an error occurs when calling Tickets#get_page, nil will be returned.
+      #
+      # The outer if-else condition catches the instance where Tickets#get_page
+      # returns a nil response on the initial call (above).
+      # This can occur if we can't connect to the API..
       if !tickets_paginated.nil?
         until tickets_paginated.empty?
           puts "____________ Page #{page_number} ____________"
@@ -80,16 +115,16 @@ class Application
         puts 'No tickets to display'
       end
 
-    when 2
+    when 2  # display a single ticket.
       puts 'Enter a ticket ID : '
       print '> '
       @tickets.get_single(gets.chomp.to_i).display
 
-    when 3
+    when 3  # signals that the user is ready to quit.
       @quit_application = true
       puts 'Goodbye, have a nice day.'
 
-    else
+    else  # handles invalid input.
       puts 'Please enter a valid option'
     end
 
