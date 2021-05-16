@@ -35,8 +35,8 @@ class Tickets
   # offset at page_number*per_page.
   #
   # INPUT:
-  # page_number : integer
-  # per_page    : integer
+  # page_number:  integer
+  # per_page:     integer
   #
   # RETURN:
   # Array[Ticket] if no error is raised.

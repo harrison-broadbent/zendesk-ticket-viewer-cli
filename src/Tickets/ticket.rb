@@ -39,6 +39,12 @@ class Ticket
       ['Description', @description.to_s.scan(/.{1,66}[ \W\d]/).join("\n")]
     ]
 
+    # displays the table with a top and bottom newline
+    # to avoid clutter.
+    puts
+    puts table
+    puts
+
     # Explanation of @description.to_s.scan(/.{1,66} /).join("\n") -
     #
     # Adds a newline every 66 characters .{1,66}
@@ -65,12 +71,6 @@ class Ticket
     # |              | eu laborum cillum nostrud eu. Mollit duis qui non ea deserunt est  |
     # |              | est et officia ut excepteur Lorem pariatur deserunt.               |
     # +--------------+--------------------------------------------------------------------+
-
-    # displays the table with a top and bottom newline
-    # to avoid clutter.
-    puts
-    puts table
-    puts
 
   end
 end
