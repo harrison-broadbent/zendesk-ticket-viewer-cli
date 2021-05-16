@@ -33,8 +33,11 @@ Other ruby versions and application environments may not work or may cause unexp
 
 Click the image below to watch a short (3 minutes) video walking you through the setup for the application.
 
-[](./docs/setup-video-and-walkthrough.mp4)
-[![Play setup video](./docs/zendesk-video-screenshot-with-play-button.jpg)](./docs/setup-video-and-walkthrough.mp4 "Video Title")
+[](https://user-images.githubusercontent.com/5293153/118398207-f1083d80-b69a-11eb-8d5f-2913b666dc5d.mp4)
+[![Play setup video](https://user-images.githubusercontent.com/5293153/118398228-041b0d80-b69b-11eb-831f-abe03f6ad6d6.jpg)](https://user-images.githubusercontent.com/5293153/118398207-f1083d80-b69a-11eb-8d5f-2913b666dc5d.mp4 "Zendesk CLI Application Walkthrough")
+
+
+
 
 ### Application installation and setup
 
