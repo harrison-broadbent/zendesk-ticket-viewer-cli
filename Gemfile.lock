@@ -32,11 +32,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  dotenv
-  minitest
-  rake
+  dotenv (~> 2.7.6)
+  minitest (~> 5.14.4)
+  rake (~> 13.0.3)
   terminal-table (~> 3.0)
-  zendesk_api
+  zendesk_api (~> 1.29.0)
+
+RUBY VERSION
+   ruby 3.0.0p0
 
 BUNDLED WITH
    2.2.15
