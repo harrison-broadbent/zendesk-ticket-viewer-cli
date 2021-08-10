@@ -1,6 +1,7 @@
 # zendesk-ticket-viewer-cli
 
 > Zendesk Ticket Viewer CLI application for the Zendesk coding interview challenge
+> Author: Harrison Broadbent
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
@@ -35,9 +36,6 @@ Click the image below to watch a short (3 minutes) video walking you through the
 
 [](https://user-images.githubusercontent.com/5293153/118398207-f1083d80-b69a-11eb-8d5f-2913b666dc5d.mp4)
 [![Play setup video](https://user-images.githubusercontent.com/5293153/118398228-041b0d80-b69b-11eb-831f-abe03f6ad6d6.jpg)](https://user-images.githubusercontent.com/5293153/118398207-f1083d80-b69a-11eb-8d5f-2913b666dc5d.mp4 "Zendesk CLI Application Walkthrough")
-
-
-
 
 ### Application installation and setup
 
